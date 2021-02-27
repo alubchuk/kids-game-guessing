@@ -12,6 +12,13 @@ function generateRandomNumber(elementsLength) {
   return Math.round(Math.random() * (elementsLength - 1));
 }
 
+function generateRandomRGBA() {
+  const r = Math.round(Math.random() * 255);
+  const g = Math.round(Math.random() * 255);
+  const b = Math.round(Math.random() * 255);
+  return `rgba(${r}, ${g}, ${b}, 1)`;
+}
+
 const cells = generateArray(CELLS_COUNT);
 
 export default function App() {
@@ -51,7 +58,11 @@ export default function App() {
       </button>
       <div className="field" onClick={handleClick}>
         {cells.map((_, i) => (
-          <button key={i} data-idx={i}>
+          <button
+            key={i}
+            data-idx={i}
+            style={{ backgroundColor: generateRandomRGBA() }}
+          >
             <span className={clx("icon", { chosen: chosen.includes(i) })}>
               {i === winner ? "🏆️" : "😜"}
             </span>
