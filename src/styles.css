@@ -34,8 +34,11 @@
 }
 
 button {
-  width: 150px;
-  height: 150px;
+  width: 146px;
+  height: 146px;
+  border: 0;
+  outline: 1px solid black;
+  margin: 2px;
 }
 
 button:hover {
@@ -43,10 +46,12 @@ button:hover {
 }
 
 .icon {
-  display: none;
+  display: inline-block;
+  visibility: hidden;
 }
 
 .chosen {
-  display: inline-block;
-  transform: scale(2);
+  transition: visibility, transform 0.3s ease-in;
+  visibility: visible;
+  transform: scale(3);
 }

@@ -12,6 +12,10 @@ function generateRandomNumber(elementsLength) {
   return Math.round(Math.random() * (elementsLength - 1));
 }
 
+function generateRandomColors(count) {
+  return new Array(count).fill(0).map((v) => generateRandomRGBA());
+}
+
 function generateRandomRGBA() {
   const r = Math.round(Math.random() * 255);
   const g = Math.round(Math.random() * 255);
@@ -22,6 +26,7 @@ function generateRandomRGBA() {
 const cells = generateArray(CELLS_COUNT);
 
 export default function App() {
+  const [colors, setColors] = useState(generateRandomColors(CELLS_COUNT));
   const [gameFinished, setGameFinished] = useState(false);
   const [chosen, setChosen] = useState([]);
   const [winner, setWinner] = useState(generateRandomNumber(CELLS_COUNT));
@@ -35,6 +40,7 @@ export default function App() {
   const handleRestart = useCallback(() => {
     setChosen([]);
     setWinner(generateRandomNumber(CELLS_COUNT));
+    setColors(generateRandomColors(CELLS_COUNT));
     setGameFinished(false);
   }, []);
 
@@ -58,11 +64,7 @@ export default function App() {
       </button>
       <div className="field" onClick={handleClick}>
         {cells.map((_, i) => (
-          <button
-            key={i}
-            data-idx={i}
-            style={{ backgroundColor: generateRandomRGBA() }}
-          >
+          <button key={i} data-idx={i} style={{ backgroundColor: colors[i] }}>
             <span className={clx("icon", { chosen: chosen.includes(i) })}>
               {i === winner ? "🏆️" : "😜"}
             </span>
