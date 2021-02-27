@@ -1,6 +1,8 @@
 import "./styles.css";
 import { useState, useCallback, useEffect } from "react";
 import clx from "classnames";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 const CELLS_COUNT = 12;
 
@@ -30,6 +32,7 @@ export default function App() {
   const [gameFinished, setGameFinished] = useState(false);
   const [chosen, setChosen] = useState([]);
   const [winner, setWinner] = useState(generateRandomNumber(CELLS_COUNT));
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     if (chosen.includes(winner)) {
@@ -59,6 +62,7 @@ export default function App() {
 
   return (
     <div className={clx("container", { finished: gameFinished })}>
+      {gameFinished ? <Confetti width={width} height={height} /> : null}
       <button className="restart" onClick={handleRestart}>
         Начать заново!
       </button>
