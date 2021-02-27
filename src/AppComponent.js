@@ -75,19 +75,22 @@ export default function App() {
         Начать заново!
       </button>
       <div className="field" onClick={handleClick}>
-        {cells.map((_, i) => (
-          <button
-            key={i}
-            data-idx={i}
-            style={{
-              backgroundImage: `url(${images[i]})`
-            }}
-          >
-            <span className={clx("icon", { chosen: chosen.includes(i) })}>
-              {i === winner ? "🏆️" : "😜"}
-            </span>
-          </button>
-        ))}
+        {cells.map((_, i) => {
+          const isChosen = chosen.includes(i);
+          return (
+            <button
+              key={i}
+              data-idx={i}
+              style={{
+                backgroundImage: isChosen ? "none" : `url(${images[i]})`
+              }}
+            >
+              <span className={clx("icon", { chosen: isChosen })}>
+                {i === winner ? "🏆️" : "😜"}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
