@@ -18,7 +18,7 @@
   flex-wrap: wrap;
 }
 
-.startGame {
+.restart {
   visibility: hidden;
   height: 8vh;
   background-color: green;
@@ -29,7 +29,7 @@
   font-size: 1.2em;
 }
 
-.finished .startGame {
+.finished .restart {
   visibility: visible;
 }
 
@@ -42,7 +42,7 @@ button:hover {
   cursor: pointer;
 }
 
-.cell {
+.icon {
   display: none;
 }
 
